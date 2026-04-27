@@ -31,7 +31,6 @@ export default function App() {
 
   useEffect(() => {
     if (user) setHighScore(user.highScore);
-
     axios
       .get(`${BASE_URL}/highscore`)
       .then(res => setGlobalHighScore(res.data.score))
@@ -49,13 +48,11 @@ export default function App() {
 
   const clickCard = (i) => {
     if (flipped.length === 2 || flipped.includes(i)) return;
-
     const newFlip = [...flipped, i];
     setFlipped(newFlip);
 
     if (newFlip.length === 2) {
       const [a, b] = newFlip;
-
       if (cards[a] === cards[b]) {
         setMatched([...matched, cards[a]]);
         setScore(prev => prev + 10);
@@ -79,19 +76,15 @@ export default function App() {
   if (!user) return <Login setUser={setUser} />;
 
   return (
-    <div style={{ textAlign: "center", background: "lightblue", minHeight: "100vh" }}>
+    <div style={{ textAlign: "center", background: "lightblue", minHeight: "100vh", padding: "20px" }}>
       <h1>Welcome {user.username} 🎮</h1>
-      <h2>
-        Level: {level} | Score: {score} | High: {highScore} | Global: {globalHighScore}
-      </h2>
-
-      <div>
+      <h2>Level: {level} | Score: {score} | High: {highScore} | Global: {globalHighScore}</h2>
+      <div style={{ marginBottom: "20px" }}>
         <button onClick={() => setLevel("easy")}>Easy</button>
         <button onClick={() => setLevel("medium")}>Medium</button>
         <button onClick={() => setLevel("hard")}>Hard</button>
       </div>
-
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,80px)", gap: "10px", justifyContent: "center" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,80px)", gap: "10px", justifyContent: "center", margin: "0 auto" }}>
         {cards.map((c, i) => (
           <div
             key={i}
@@ -104,7 +97,8 @@ export default function App() {
               justifyContent: "center",
               alignItems: "center",
               fontSize: "30px",
-              borderRadius: "10px"
+              borderRadius: "10px",
+              cursor: "pointer"
             }}
           >
             {flipped.includes(i) || matched.includes(c) ? c : "?"}
