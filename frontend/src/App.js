@@ -30,13 +30,11 @@ export default function App() {
   const [globalHighScore, setGlobalHighScore] = useState(0);
 
   useEffect(() => {
-    if (user) {
-      setHighScore(user.highScore);
-    }
+    if (user) setHighScore(user.highScore);
 
     axios
       .get(`${BASE_URL}/highscore`)
-      .then((res) => setGlobalHighScore(res.data.score))
+      .then(res => setGlobalHighScore(res.data.score))
       .catch(() => console.log("Backend not connected"));
   }, [user]);
 
@@ -60,7 +58,7 @@ export default function App() {
 
       if (cards[a] === cards[b]) {
         setMatched([...matched, cards[a]]);
-        setScore((prev) => prev + 10);
+        setScore(prev => prev + 10);
         setFlipped([]);
       } else {
         setTimeout(() => setFlipped([]), 800);
