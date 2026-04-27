@@ -209,3 +209,23 @@ export default function App() {
         /div>
     );
 }
+import React, { useEffect, useState } from "react";
+
+function App() {
+  const [score, setScore] = useState(0);
+
+  useEffect(() => {
+    fetch("https://memeory-game-fullstack.onrender.com/highscore")
+      .then(res => res.json())
+      .then(data => setScore(data.score))
+      .catch(err => console.log(err));
+  }, []);
+
+  return (
+    <div>
+      <h1>High Score: {score}</h1>
+    </div>
+  );
+}
+
+export default App;
