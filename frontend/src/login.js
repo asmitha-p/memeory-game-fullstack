@@ -20,7 +20,7 @@ export default function Login({ setUser }) {
                 alert(res.data.message);
             }
         } catch (error) {
-            alert("Login failed: " + error.response ? .data ? .message || error.message);
+            alert("Login failed: " + (error.response && error.response.data && error.response.data.message ? error.response.data.message : error.message));
         }
     };
 
@@ -32,34 +32,39 @@ export default function Login({ setUser }) {
             });
             alert("User Registered! Now Login");
         } catch (error) {
-            alert("Registration failed: " + error.response ? .data ? .message || error.message);
+            alert("Registration failed: " + (error.response && error.response.data && error.response.data.message ? error.response.data.message : error.message));
         }
     };
 
     return ( <
         div style = {
-            { textAlign: "center", backgroundColor: "lightblue", minHeight: "100vh", color: "white", padding: "20px" } } >
+            { textAlign: "center", backgroundColor: "lightblue", minHeight: "100vh", color: "white", padding: "20px" }
+        } >
         <
         h2 > Login / Register < /h2> <
         input style = {
-            { margin: "5px", padding: "10px", borderRadius: "5px", border: "1px solid #ccc" } }
+            { margin: "5px", padding: "10px", borderRadius: "5px", border: "1px solid #ccc" }
+        }
         placeholder = "Username"
         onChange = { e => setUsername(e.target.value) }
         /><br / > < br / >
         <
         input style = {
-            { margin: "5px", padding: "10px", borderRadius: "5px", border: "1px solid #ccc" } }
+            { margin: "5px", padding: "10px", borderRadius: "5px", border: "1px solid #ccc" }
+        }
         type = "password"
         placeholder = "Password"
         onChange = { e => setPassword(e.target.value) }
         /><br / > < br / >
         <
         button style = {
-            { backgroundColor: "white", color: "black", margin: "5px", padding: "10px 20px", border: "none", borderRadius: "5px" } }
+            { backgroundColor: "white", color: "black", margin: "5px", padding: "10px 20px", border: "none", borderRadius: "5px" }
+        }
         onClick = { handleLogin } > Login < /button> <
         button style = {
-            { backgroundColor: "white", color: "black", margin: "5px", padding: "10px 20px", border: "none", borderRadius: "5px" } }
-        onClick = { handleRegister } > Register < /button> <
-        /div>
+            { backgroundColor: "white", color: "black", margin: "5px", padding: "10px 20px", border: "none", borderRadius: "5px" }
+        }
+        onClick = { handleRegister } > Register < /button> < /
+        div >
     );
 }
